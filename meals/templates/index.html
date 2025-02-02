@@ -1,0 +1,38 @@
+{% load static %}
+{% load tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostel Meals | Simple, cheap, and somewhat decent recipes</title>
+    <link rel="stylesheet" href="{% static 'reset.min.css' %}">
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+</head>
+<body>
+    <header id="header">
+        <h1>Hostel Meals</h1>
+        <p>Easy, cheap, and somewhat decent meals! <br/>It ain't gormet but it'll keep you moving!</p>
+    </header>
+
+    <span class="seperator">
+        &#8231;&bull;&#10020;&bull;&#8231;
+    </span>
+    
+    <main>
+        <section>
+            <h2>Latest Recipes</h2>
+
+            <div>
+            {% for recipe in recipes %}
+                <div class="recipe-link">
+                    <a href="/recipe/{{ recipe.slug }}">{{ recipe.short_name }}</a>
+                    <span>{% display_published_or_updated recipe.created_at recipe.updated_at %}</span>
+                </div>
+            {% endfor %}
+            </div>
+        </section>
+    </main>
+</body>
+</html>

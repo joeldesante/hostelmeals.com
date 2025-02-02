@@ -1,0 +1,74 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ recipe.short_name }} | Hostel Meals</title>
+
+    <link rel="stylesheet" href="{% static 'reset.min.css' %}">
+    <link rel="stylesheet" href="{% static 'recipe.css' %}">
+</head>
+<body>
+    <header>
+        <h3>Hostel Meals</h3>
+    </header>
+
+    <nav>
+        <a href="/">Return Home</a>
+    </nav>
+
+    <main>
+        <h1>{{ recipe.article_name }}</h1>
+        <p>{{ recipe.description }}</p>
+
+        <section>
+            <h3>Ingredients:</h2>
+            <ul>
+                {% for ingredient in recipe.ingredients %}
+                    <li>{{ ingredient }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section>
+            <h3>Steps:</h2>
+            <ol>
+                {% for step in recipe.procedure %}
+                    <li>{{ step }}</li>
+                {% endfor %}
+            </ol>
+        </section>
+
+        {% if recipe.article %}
+            <span class="seperator">
+                &#8231;&bull;&#10020;&bull;&#8231;
+            </span>
+
+            <article>
+                <h3>The story behind this recipe:</h3>
+                <p>{{ recipe.article }}</p>
+            </article>
+        {% endif %}
+
+
+        <span class="seperator">
+            &#8231;&bull;&#10020;&bull;&#8231;
+        </span>
+
+        <section>
+            <small>Published: {{ recipe.created_at }}</small><br/>
+            <small>Last Updated: {{ recipe.updated_at }}</small>
+        </section>
+    </main>
+
+    <footer>
+        <div class="attribution">
+            <span>
+                <a href="https://hosetlmeals.com/recipe/{{ recipe.slug }}">This recipe</a> is freely available and in the Public Domain.
+            </span>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,65 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Recipe | Hostel Meals</title>
+
+    <link rel="stylesheet" href="{% static 'reset.min.css' %}">
+    <link rel="stylesheet" href="{% static 'add_recipe.css' %}">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="{% static 'add_recipe.js' %}" defer=""></script>
+</head>
+<body>
+
+    <header>
+        <h1>Add A Recipe!</h1>
+    </header>
+
+    <span class="seperator">
+        &#8231;&bull;&#10020;&bull;&#8231;
+    </span>
+
+    <main class="form">
+        <div class="form-element">
+            <label for="short-name">Short Name:</label>
+            <input type="text" name="short-name" id="short-name">
+        </div>
+
+        <div class="form-element">
+            <label for="full-name">Full Name:</label>
+            <input type="text" name="full-name" id="full-name">
+        </div>
+
+        <div class="form-element">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description"></textarea>
+        </div>
+
+        <div class="form-element">
+            <label for="ingredients">Ingredients:</label>
+            <input type="text" name="ingredients" id="ingredients"><button>Add</button>
+            <ul></ul>
+        </div>
+
+        <div class="form-element">
+            <label for="steps">Steps:</label>
+            <input type="text" name="steps" id="steps">
+            <ol></ol>
+        </div>
+
+        <div class="form-element">
+            <label for="story">Story:</label>
+            <textarea id="story" name="story"></textarea>
+        </div>
+
+        <div class="form-element">
+            <button>Publish</button>
+        </div>
+
+    </main>
+</body>
+</html>

@@ -1,0 +1,35 @@
+header {
+    display: flex;
+    justify-content: center;
+}
+
+nav {
+    margin: 1rem 1rem;
+}
+
+div.attribution {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    font-size: x-small;
+    color: #FFFFFF;
+
+    border: 1px solid #FFFFFF;
+    border-radius: 1px;
+    padding: 0.25rem;
+    margin: 1rem 0rem;
+
+}
+
+div.attribution > div {
+    display: flex;
+    flex-flow: row;
+    gap: 2px;
+}
+
+div.attribution > div > img {
+    height: 16px;
+    width: 16px;
+}

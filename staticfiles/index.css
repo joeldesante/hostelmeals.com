@@ -1,0 +1,23 @@
+header {
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+}
+
+.recipe-link {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+}
+
+@media screen and (max-width: 500px)  {
+    .recipe-link {
+        display: flex;
+        flex-flow: column;
+        justify-content: space-between;
+    }
+    
+    .recipe-link > span {
+        font-size: small;
+    }
+}
