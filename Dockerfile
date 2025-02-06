@@ -41,6 +41,6 @@ USER appuser
 
 # Expose the Django port
 EXPOSE 8000
- 
+
 # Start the application using Gunicorn
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "3", "hostelmeals.wsgi:application"]

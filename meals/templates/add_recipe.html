@@ -9,11 +9,24 @@
 
     <link rel="stylesheet" href="{% static 'reset.min.css' %}">
     <link rel="stylesheet" href="{% static 'add_recipe.css' %}">
-
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="{% static 'add_recipe.js' %}" defer=""></script>
 </head>
 <body>
+
+    <div
+        v-scope="{
+            data: {
+                slug: '',
+                short_name: '',
+                full_name: '',
+                story: '',
+                description: '',
+                new_ing: '', 
+                ingredients: [], 
+                new_step: '', 
+                steps: [] 
+            }
+        }"
+    >
 
     <header>
         <h1>Add A Recipe!</h1>
@@ -24,42 +37,84 @@
     </span>
 
     <main class="form">
+
         <div class="form-element">
-            <label for="short-name">Short Name:</label>
-            <input type="text" name="short-name" id="short-name">
+            <label for="slug">Slug:</label>
+            <input type="text" v-model="data.slug" name="slug" id="slug">
+        </div>
+
+        <div class="form-element">
+            <label for="short_name">Short Name:</label>
+            <input type="text" v-model="data.short_name" name="short-name" id="short-name">
         </div>
 
         <div class="form-element">
             <label for="full-name">Full Name:</label>
-            <input type="text" name="full-name" id="full-name">
+            <input type="text" v-model="data.full_name" name="full-name" id="full-name">
         </div>
 
         <div class="form-element">
             <label for="description">Description:</label>
-            <textarea id="description" name="description"></textarea>
+            <textarea id="description" v-model="data.description" name="description"></textarea>
         </div>
 
         <div class="form-element">
             <label for="ingredients">Ingredients:</label>
-            <input type="text" name="ingredients" id="ingredients"><button>Add</button>
-            <ul></ul>
+            <input type="text" v-model="data.new_ing" name="ingredients" id="ingredients">
+            <button id="add-ing" @click="data.ingredients.push(data.new_ing); data.new_ing=''">Add</button>
+            <ul>
+                <li v-for="(ingredient, index) in data.ingredients">
+                    [[ ingredient ]]
+                    <button @click="data.ingredients.splice(index, 1)">Remove</button>
+                </li>
+            </ul>
         </div>
 
         <div class="form-element">
             <label for="steps">Steps:</label>
-            <input type="text" name="steps" id="steps">
-            <ol></ol>
+            <input type="text" v-model="data.new_step" name="steps" id="steps">
+            <button @click="data.steps.push(data.new_step); data.new_step=''" id="add-step">Add</button>
+            <ol>
+                <li v-for="(step, index) in data.steps">
+                    [[ step ]]
+                    <button @click="data.steps.splice(index, 1)">Remove</button>
+                </li>
+            </ol>
         </div>
 
         <div class="form-element">
             <label for="story">Story:</label>
-            <textarea id="story" name="story"></textarea>
+            <textarea id="story" v-model="data.story" name="story"></textarea>
         </div>
 
         <div class="form-element">
-            <button>Publish</button>
+            <button @click="submitForm(data)">Publish</button>
         </div>
 
     </main>
+    </div>
+
+
+<script src=" https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js "></script>
+    <script src="https://unpkg.com/petite-vue"></script>
+    <script>
+        PetiteVue.createApp({ $delimiters: ['[[', ']]'] }).mount()
+    </script>
+    <script>
+        function submitForm(data) {
+
+            const csrftoken = Cookies.get('csrftoken');
+
+            fetch("/new", {
+                method: "POST",
+                body: JSON.stringify(data),
+                headers:{"Content-type": "application/json; charset=UTF-8", "X-CSRFToken": csrftoken}
+            }).then(_ => {
+                console.log("DONE")
+            }).catch(err => {
+                console.error(err)
+            })
+        }
+    </script>
 </body>
 </html>
